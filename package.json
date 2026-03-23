@@ -1,0 +1,35 @@
+{
+  "name": "@solrengine/wallet-utils",
+  "version": "0.1.0",
+  "description": "Wallet discovery, transaction building, and signing utilities for Solana + Rails apps",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./wallet": "./src/wallet.js",
+    "./transaction": "./src/transaction.js"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "solana",
+    "wallet",
+    "wallet-standard",
+    "rails",
+    "solrengine",
+    "stimulus"
+  ],
+  "author": "Jose Ferrer <estoy@moviendo.me>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solrengine/wallet-utils.git"
+  },
+  "homepage": "https://github.com/solrengine/wallet-utils",
+  "peerDependencies": {
+    "@solana/kit": ">=2.0.0",
+    "@solana/wallet-standard-features": ">=1.0.0",
+    "@wallet-standard/app": ">=1.0.0"
+  }
+}
