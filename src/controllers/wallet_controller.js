@@ -159,14 +159,8 @@ export default class extends Controller {
       // Request a nonce from the server
       this.showSigning()
       const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
-      const nonceResponse = await fetch(this.nonceUrlValue, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "X-CSRF-Token": csrfToken
-        },
-        body: JSON.stringify({ wallet_address: publicKey })
+      const nonceResponse = await fetch(`${this.nonceUrlValue}?wallet_address=${publicKey}`, {
+        headers: { "Accept": "application/json" }
       })
 
       if (!nonceResponse.ok) {

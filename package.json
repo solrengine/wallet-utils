@@ -1,6 +1,6 @@
 {
   "name": "@solrengine/wallet-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Wallet discovery, transaction building, signing utilities, and Stimulus controllers for Solana + Rails apps",
   "type": "module",
   "main": "src/index.js",
