@@ -1,13 +1,18 @@
 {
   "name": "@solrengine/wallet-utils",
-  "version": "0.1.0",
-  "description": "Wallet discovery, transaction building, and signing utilities for Solana + Rails apps",
+  "version": "0.2.0",
+  "description": "Wallet discovery, transaction building, signing utilities, and Stimulus controllers for Solana + Rails apps",
   "type": "module",
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./wallet": "./src/wallet.js",
-    "./transaction": "./src/transaction.js"
+    "./transaction": "./src/transaction.js",
+    "./controllers": "./src/controllers/index.js",
+    "./controllers/wallet": "./src/controllers/wallet_controller.js",
+    "./controllers/auto-refresh": "./src/controllers/auto_refresh_controller.js",
+    "./controllers/clipboard": "./src/controllers/clipboard_controller.js",
+    "./controllers/countdown": "./src/controllers/countdown_controller.js"
   },
   "files": [
     "src"
@@ -18,7 +23,8 @@
     "wallet-standard",
     "rails",
     "solrengine",
-    "stimulus"
+    "stimulus",
+    "hotwire"
   ],
   "author": "Jose Ferrer <estoy@moviendo.me>",
   "license": "MIT",
@@ -28,6 +34,8 @@
   },
   "homepage": "https://github.com/solrengine/wallet-utils",
   "peerDependencies": {
+    "@hotwired/stimulus": ">=3.0.0",
+    "@hotwired/turbo": ">=8.0.0",
     "@solana/kit": ">=2.0.0",
     "@solana/wallet-standard-features": ">=1.0.0",
     "@wallet-standard/app": ">=1.0.0"
