@@ -21,13 +21,20 @@ export default class extends Controller {
   static values = {
     nonceUrl: String,
     verifyUrl: String,
-    dashboardUrl: String
+    dashboardUrl: String,
+    cluster: { type: String, default: "mainnet-beta" }
   }
 
   connect() {
     this.availableWallets = []
     this.selectedWallet = null
     this.isMobile = isMobileDevice()
+
+    // Clear stale deep link state (older than 5 min)
+    const stale = getDeeplinkState()
+    if (stale?.timestamp && Date.now() - stale.timestamp > 5 * 60 * 1000) {
+      clearDeeplinkSession()
+    }
 
     // Check if returning from a Phantom deep link redirect
     if (this.handleDeeplinkRedirect()) return
@@ -265,7 +272,7 @@ export default class extends Controller {
     const connectUrl = buildConnectUrl({
       appUrl,
       redirectLink,
-      cluster: "mainnet-beta",
+      cluster: this.clusterValue,
       authConfig: {
         nonceUrl: this.nonceUrlValue,
         verifyUrl: this.verifyUrlValue,

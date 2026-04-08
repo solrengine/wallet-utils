@@ -84,6 +84,7 @@ export function buildConnectUrl({ appUrl, redirectLink, cluster = "mainnet-beta"
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     step: "connect",
+    timestamp: Date.now(),
     secretKey: Array.from(keypair.secretKey),
     publicKey: Array.from(keypair.publicKey),
     authConfig
