@@ -83,7 +83,7 @@ export default class extends Controller {
 
       // Store the SIWS message for verification after signing
       const state = getDeeplinkState()
-      sessionStorage.setItem("solrengine_deeplink_message", message)
+      localStorage.setItem("solrengine_deeplink_message", message)
 
       // Redirect to Phantom for message signing
       const redirectLink = window.location.origin + window.location.pathname
@@ -107,8 +107,8 @@ export default class extends Controller {
       this.showSigning()
       const { signature, walletAddress, authConfig } = handleSignMessageResponse(params)
 
-      const message = sessionStorage.getItem("solrengine_deeplink_message")
-      sessionStorage.removeItem("solrengine_deeplink_message")
+      const message = localStorage.getItem("solrengine_deeplink_message")
+      localStorage.removeItem("solrengine_deeplink_message")
 
       if (!message) throw new Error("Authentication message not found. Please try again.")
 
@@ -186,7 +186,7 @@ export default class extends Controller {
     button.className = "flex items-center gap-3 w-full p-3 rounded-xl border cursor-pointer border-purple-500 bg-purple-900/20"
 
     const img = document.createElement("img")
-    img.src = "https://phantom.app/img/phantom-logo.svg"
+    img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128' fill='%23ab9ff2'%3E%3Cpath d='M110.6 49.5c-2.9 0-5.3 2.4-5.3 5.3s2.4 5.3 5.3 5.3 5.3-2.4 5.3-5.3-2.4-5.3-5.3-5.3zm-18.9 0c-2.9 0-5.3 2.4-5.3 5.3s2.4 5.3 5.3 5.3 5.3-2.4 5.3-5.3-2.4-5.3-5.3-5.3zM64 8C33.1 8 8 33.1 8 64s25.1 56 56 56 56-25.1 56-56S94.9 8 64 8zm37.6 61.3c-.9.1-1.8.2-2.7.2-13 0-23.5-10.5-23.5-23.5 0-4.5 1.3-8.7 3.4-12.3-3.2-1.5-6.8-2.3-10.5-2.3-13.8 0-25 11.2-25 25 0 31.7-12.8 45.7-25 49.4-1.8.5-3.5-.7-3.5-2.6V64c0-23.2 18.8-42 42-42 23.2 0 42 18.8 42 42v2.7c0 1.4-1.1 2.5-2.5 2.6h4.8z'/%3E%3C/svg%3E"
     img.alt = "Phantom"
     img.className = "w-8 h-8 rounded-lg"
     button.appendChild(img)

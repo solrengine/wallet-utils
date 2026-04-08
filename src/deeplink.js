@@ -53,24 +53,24 @@ export function isMobileDevice() {
 }
 
 /**
- * Get the current deep link session state from sessionStorage.
+ * Get the current deep link session state from localStorage.
  * Returns null if no session exists.
  */
 export function getDeeplinkState() {
-  const stored = sessionStorage.getItem(STORAGE_KEY)
+  const stored = localStorage.getItem(STORAGE_KEY)
   return stored ? JSON.parse(stored) : null
 }
 
 /**
- * Clear the deep link session from sessionStorage.
+ * Clear the deep link session from localStorage.
  */
 export function clearDeeplinkSession() {
-  sessionStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem(STORAGE_KEY)
 }
 
 /**
  * Build a Phantom connect deep link URL.
- * Generates an X25519 keypair and stores it in sessionStorage for later decryption.
+ * Generates an X25519 keypair and stores it in localStorage for later decryption.
  *
  * @param {Object} options
  * @param {string} options.appUrl - The dApp URL (used by Phantom for session validation)
@@ -82,7 +82,7 @@ export function clearDeeplinkSession() {
 export function buildConnectUrl({ appUrl, redirectLink, cluster = "mainnet-beta", authConfig }) {
   const keypair = nacl.box.keyPair()
 
-  sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
     step: "connect",
     secretKey: Array.from(keypair.secretKey),
     publicKey: Array.from(keypair.publicKey),
@@ -132,7 +132,7 @@ export function handleConnectResponse(urlParams) {
   const { public_key, session } = JSON.parse(new TextDecoder().decode(decrypted))
 
   // Persist state for signMessage step
-  sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
     step: "connected",
     secretKey: stored.secretKey,
     publicKey: stored.publicKey,
@@ -175,7 +175,7 @@ export function buildSignMessageUrl({ message, redirectLink }) {
     sharedSecret
   )
 
-  sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
     ...stored,
     step: "signing"
   }))
